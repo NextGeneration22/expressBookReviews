@@ -73,8 +73,6 @@ public_users.get('/author/:author', async function (req, res) {
   }catch(err){
     res.status(404).send(err)
   }
-  //getbook.then(resp=> res.status(200).send(resp))
-   //       .catch(err=>res.status(404).send(err))
   //return res.status(300).json({message: "Yet to be implemented"});
 });
 
