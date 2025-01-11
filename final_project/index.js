@@ -8,9 +8,20 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
+app.use("/customer",session({secret:"secretkey",resave: true, saveUninitialized: true}))
 
 app.use("/customer/auth/*", function auth(req,res,next){
+   const tokenmessage = req.session.authenticated
+   if(!tokenmessage){
+    return res.send("you don't have access! you must login first.")
+   }
+   jwt.verify(tokenmessage.token, "secretkey", (err, user)=>{
+    if(err){
+        return res.status(401).send("You are not one of our users!")
+    }
+    req.user = user;
+    next()
+   })
 //Write the authenication mechanism here
 });
  
