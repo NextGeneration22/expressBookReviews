@@ -16,7 +16,7 @@ if(name && password){
       name: name,
       password: password
     })
-   res.status(201).send("the user hase been added")
+   res.status(200).send({message: "New customer has been register, you can login now"})
   }
 }else{
   res.status(400).send("please provide a username and password!")
